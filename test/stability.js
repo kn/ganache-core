@@ -162,7 +162,7 @@ describe("stability", function(done) {
         blockchain.vm.stateManager.revert(function() {
           done();
         }); // processCall or processBlock
-      });
+      }, true);
     });
 
     it("should not cause 'pop' of undefined", function(done) {
@@ -183,7 +183,7 @@ describe("stability", function(done) {
             });
           });
         });
-      });
+      }, true);
     });
   });
 });
