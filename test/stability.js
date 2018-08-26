@@ -131,8 +131,7 @@ describe("stability", function(done) {
     });// nothing to check from here, if the promise rejects, test fails
   })
 
-  //TODO: remove `.skip` when working on and/or submitting fix for issue #453
-  describe.skip("race conditions", function(done) {
+  describe("race conditions", function(done) {
     var web3 = new Web3();
     var provider;
     var accounts;
@@ -175,7 +174,7 @@ describe("stability", function(done) {
       // processNextBlock triggered by interval mining which at some point calls vm.stateManager.commit() and blockchain.putBlock()
       blockchain.processNextBlock(function(err, tx, results) {
         blockchain.vm.stateManager.revert(function() { // processCall #1 finishes
-          blockchain.latestBlock(function (err, latestBlock) { 
+          blockchain.latestBlock(function (err, latestBlock) {
             blockchain.stateTrie.root = latestBlock.header.stateRoot; // getCode #1 (or any function with this logic)
             web3.eth.call({}, function() {
               done();
